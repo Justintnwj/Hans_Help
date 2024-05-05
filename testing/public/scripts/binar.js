@@ -41,3 +41,5 @@ class Binar {
     return cars;
   }
 }
+
+export default Binar;

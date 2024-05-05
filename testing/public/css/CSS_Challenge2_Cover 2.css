@@ -159,6 +159,13 @@
     justify-content: space-between;
   }
 
+  .col3-content{
+    margin-top: 200px;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+  }
+
   .col2-content-isi1{
     width: 210.75px;
     height: 100%;
@@ -704,5 +711,4 @@
     width: 100px;
     height: 34px;
   }
-
 }

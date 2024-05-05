@@ -1,104 +1,99 @@
+import Binar from "./binar.js";
+import Car from "./car.example.js";
+
+const DENGAN_SUPIR = 1;
+const TANPA_SUPIR = 2;
+
 class App {
   constructor() {
-    // this.clearButton = document.getElementById("clear-btn");
-    // this.loadButton = document.getElementById("load-btn");
-    // this.carContainerElement = document.getElementById("cars-container");
-    this.typeDriver = document.getElementById("type-driver")
-    this.dateCar = document.getElementById("date-car")
-    this.availableAt = document.getElementById("available-at")
-    this.rowSeat = document.getElementById("row-seat")
-    this.searchCar = document.getElementById("sarch-car")
-    this.carCointainerElement = document.getElementById("row-cars")
+    this.driverType = document.getElementById("driverType");
+    this.selectedDate = document.getElementById("selectedDate");
+    this.availableAt = document.getElementById("availableAt");
+    this.rowSeat = document.getElementById("row-seat");
+    this.searchButton = document.getElementById("searchButton");
+    this.carCointainerElement = document.getElementById("rowCars");
   }
 
   async init() {
+    await this.load();
+    let self = this;
 
-    let self=this
-
-    this.searchCar.addEventListener('click',async function(){
-      await self.load()
-      self.clear()
-      self.run()
+    // Register click listener
+    this.searchButton.addEventListener("click", async function () {
+      await self.load();
+      self.clear();
+      self.run();
     });
-    
-    this.typeDriver.onchange = (event) =>{
-      if (event.target.value != '' && self.dateCar.value != '' && self.availableAt.value !=''){
-        self.searchCar.removeAttribute('disabled')
-      }
-    }
 
-    this.dateCar.onchange =(event) =>{
-      if (self.typeDriver.value != '' && event.target.value != '' && self.availableAt.value != ''){
-        self.searchCar.removeAttribute('disabled')
+    this.driverType.onchange = (event) => {
+      if (
+        event.target.value != "" &&
+        self.selectedDate.value != "" &&
+        self.availableAt.value != ""
+      ) {
+        self.searchButton.removeAttribute("disabled");
       }
-    }
-    
-    this.availableAt.onchange = (event) =>{
-      if (self.typeDriver.value != '' && self.dateCar.value != '' && event.target.value != ''){
-        self.searchCar.removeAttribute('disabled')
+    };
+
+    this.selectedDate.onchange = (event) => {
+      if (
+        self.driverType.value != "" &&
+        event.target.value != "" &&
+        self.availableAt.value != ""
+      ) {
+        self.searchButton.removeAttribute("disabled");
       }
-    }
-    
-    // run = () => {
-    //   Car.list.forEach((car) => {
-    //     const node = document.createElement("div");
-    //     node.classList.add('col-md-4')
-    //     node.innerHTML = car.render();
-    //     this.carCointainerElement.appendChild(node);
-    //   })
-    // }
-    
-  //   await this.load();
+    };
 
-  //   // Register click listener
-  //   this.clearButton.onclick = this.clear;
-  //   this.loadButton.onclick = this.run;
-  // }
-
+    this.availableAt.onchange = (event) => {
+      if (
+        self.driverType.value != "" &&
+        self.selectedDate.value != "" &&
+        event.target.value != ""
+      ) {
+        self.searchButton.removeAttribute("disabled");
+      }
+    };
+    
+    this.searchButton.onclick = this.run;
+  }
+  // Render cars
   run = () => {
     Car.list.forEach((car) => {
       const node = document.createElement("div");
+      node.classList.add("col-md-4");
       node.innerHTML = car.render();
-      this.carContainerElement.appendChild(node);
+      this.carCointainerElement.appendChild(node);
     });
   };
-
+  
   async load() {
-    localStorage.removeItem('CARS')
-    await Binar.listCars()
-    const getCars = JSON.parse(localStorage.getItem('CARS'))
+    // Get all cars
+    let cars = await Binar.listCars();
 
-    console.log(getCars);
+    // Filter cars based on selected date, available at, driver type, and row seat
+    let filteredCars = cars.filter((car) => {
+      return cars.filter((car) => {
+        return (
+          car.available === true
+          // car.date === selectedDate &&
+          // car.availableAt === availableAt &&
+          // car.driverType === driverType &&
+          // car.rowSeat === rowSeat &&
+          // selectedDate &&
+          // selectedDate.trim() !== "" &&
+          // availableAt &&
+          // availableAt.trim() !== "" &&
+          // driverType &&
+          // driverType.trim() !== "" &&
+          // rowSeat &&
+          // rowSeat.trim() !== ""
+        );
+      });
+    });
 
-    const newCars = getCars.map((car) => {
-      const listTypeDriver = ['dengan-sopir','tanpa-sopir']
+    console.log(filteredCars)
 
-
-      return {
-        ...car,
-        typeDriver:listTypeDriver(Math.floor(Math.random() * listTypeDriver.length))
-      }
-    })
-
-    const cars = newCars.filter((car)=> {
-      if (this.dateCar.value != '' && this.availableAt.value != '' && this.typeDriver.value !=''){
-        let date1= new Date(`${this.dateCar.value} ${this.availableAt.value}`)
-        let date2= new Date(car.availableAt)
-      }
-
-      if (this.rowSeat.value != ''){
-        if (date2.getTime() >= date1.getTime() && this.typeDriver.value = car.typeDriver && car.capacity >= this.rowSeat.value){
-          return true
-        }
-        else {
-          if (date2.getTime() >= date1.getTime() && this.typeDriver.value = car.typeDriver){
-            return true
-          }
-        }
-      }
-    })
-
-    // const cars = await Binar.listCars();
     Car.init(cars);
   }
 
@@ -111,3 +106,5 @@ class App {
     }
   };
 }
+
+export default App;

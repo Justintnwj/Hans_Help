@@ -91,7 +91,7 @@
           <div class="col2-content">
             <div class="col2-content-isi1">
               <h3>Tipe Driver</h3>
-              <select class="form-select-1" id = "driverType" aria-label="Default select example">
+              <select class="form-select-1" id="driverType" aria-label="Default select example">
                 <option value="0">Pilih Tipe Driver</option>
                 <option value="1">Dengan Sopir</option>
                 <option value="2">Tanpa Sopir (Lepas Kunci)</option>
@@ -100,18 +100,18 @@
             <div class="col2-content-isi2">
               <h3>Tanggal</h3>
               <form class="dateWrapping">
-                <input type="date"  id ="datePick" class="datePicker">
+                <input type="date" id="selectedDate" class="datePicker">
               </form>
             </div>
             <div class="col2-content-isi3">
               <h3>Waktu Jemput/Ambil</h3>
-              <select class="form-select-2" aria-label="Default select example">
+              <select class="form-select-2" id="availableAt" aria-label="Default select example">
                 <option value="0">Pilih Waktu</option>
                 <option class="timeChoose" value="1">08.00 WIB</option>
                 <option class="timeChoose" value="2">09.00 WIB</option>
-                <option class="timeChoose" value="2">10.00 WIB</option>
-                <option class="timeChoose" value="2">11.00 WIB</option>
-                <option class="timeChoose" value="2">12.00 WIB</option>
+                <option class="timeChoose" value="3">10.00 WIB</option>
+                <option class="timeChoose" value="4">11.00 WIB</option>
+                <option class="timeChoose" value="5">12.00 WIB</option>
               </select>
             </div>
             <div class="col2-content-isi4">
@@ -119,12 +119,15 @@
               <input type="text" class="passengerPicker">
             </div>
             <div class="col2-content-isi5">
-              <button class="findCar">
+              <button class="findCar" id="searchButton">
                 <a href=”domain.tld/about”>Cari Mobil</a>
               </button>
             </div>
           </div>
         </div>
+      </div>
+            
+      <div class="row row-cars" style="margin: 10%; margin-top: 5%;" id="rowCars">
       </div>
 
     </main>
@@ -159,7 +162,8 @@
       </div>
     </footer>
   </div>
-  <script type="module" src="/public/scripts/app.example.js"></script>
+  <script type="module" src="scripts/app.example.js"></script>
+  <script type="module" src="scripts/main.example.js"></script>
 </body>
 
 </html>

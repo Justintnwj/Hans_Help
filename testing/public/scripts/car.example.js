@@ -6,7 +6,9 @@ class Car {
   }
 
   formatRupiah(number) {
-    return new Intl.NumberFormat('id-ID',{minimumFractionDigits:0}).format(number)
+    return new Intl.NumberFormat("id-ID", { minimumFractionDigits: 0 }).format(
+      number
+    );
   }
 
   constructor({
@@ -52,7 +54,9 @@ class Car {
         style="width:100%px; height:250px"
       />
       <div class="card-body">
-        <p class="card-text">${this.manufacture} ${this.model} / ${this.type}</p>
+        <p class="card-text">${this.manufacture} ${this.model} / ${
+      this.type
+    }</p>
         <p class="card-text">
             <b>Rp. ${this.formatRupiah(this.rentPerDay)}/ Hari</b>
         </p>
@@ -81,13 +85,7 @@ class Car {
           </div>
           </div>
           `;
-  }}
-//       <p>id: <b>${this.id}</b></p>
-//       <p>plate: <b>${this.plate}</b></p>
-//       <p>manufacture: <b>${this.manufacture}</b></p>
-//       <p>model: <b>${this.model}</b></p>
-//       <p>available at: <b>${this.availableAt}</b></p>
-//       <img src="${this.image}" alt="${this.manufacture}" width="64px">
-//     `;
-//   }
-// }
+  }
+}
+
+export default Car;

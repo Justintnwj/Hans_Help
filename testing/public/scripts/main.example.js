@@ -1,3 +1,5 @@
+import App from './app.example.js';
+
 /*
  * Contoh kode untuk membaca query parameter,
  * Siapa tau relevan! :)
