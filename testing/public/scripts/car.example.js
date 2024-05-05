@@ -2,6 +2,7 @@ class Car {
   static list = [];
 
   static init(cars) {
+    this.list = [];
     this.list = cars.map((i) => new this(i));
   }
 
